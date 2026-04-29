@@ -1,0 +1,42 @@
+
+
+services:
+  mongodb:
+    image: "mongo:latest"
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: "admin"
+      MONGO_INITDB_ROOT_PASSWORD: "omkar123"
+      MONGO_INITDB_DATABASE: "users_db"
+    networks: 
+      - "my-network"
+    volumes:
+      - mongodb_data:/data/db    # Data save karne ke liye volume map kiya
+
+  userService:
+    build: ./user-service
+    ports: 
+      - "8081:8081"
+    environment:
+      MONGODB_URI: "mongodb://admin:omkar123@mongodb:27017/users_db?authSource=admin"
+      JWT_SECRET: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
+      JWT_EXPIRATION: 86400000
+      JWT_REFRESH_EXPIRATION: 604800000
+      CORS_ALLOWED_ORIGINS: "*"
+      SEED_ADMIN_EMAIL: "admin@medicalerp.com"
+      SEED_ADMIN_PASSWORD: "Admin@123456"
+      SEED_ORG_NAME: "MedERP HQ"
+      SEED_ORG_REG_NUMBER: "HQ-0001"
+    networks:
+      - "my-network"
+    depends_on:
+      - mongodb
+
+networks:
+  my-network:
+    driver: bridge
+
+# Volume ko globally define karna padta hai
+volumes:
+  mongodb_data:
