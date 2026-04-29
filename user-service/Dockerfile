@@ -9,4 +9,4 @@ FROM openjdk:17.0.2-jdk
 WORKDIR  /app
 COPY --from=build  /app/target/  ./
 EXPOSE 8081
-CMD  ["sleep","300"]
+CMD  ["java","-jar","user-service-1.0.0.jar"]
