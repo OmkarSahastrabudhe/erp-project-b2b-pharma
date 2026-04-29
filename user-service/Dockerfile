@@ -5,7 +5,7 @@ COPY  src/  ./src/
 RUN mvn clean package -DskipTests
 
 
-FROM openjdk:17-jdk-slim    
+FROM openjdk:17.0.2-jdk 
 WORKDIR  /app
 COPY --from=build  /app/target/  ./
 EXPOSE 8081
