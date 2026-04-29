@@ -14,7 +14,7 @@ services:
     volumes:
       - mongodb_data:/data/db    # Data save karne ke liye volume map kiya
 
-  userService:
+  userservice:
     build: ./user-service
     ports: 
       - "8081:8081"
