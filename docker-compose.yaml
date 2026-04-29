@@ -8,7 +8,9 @@ services:
     
     networks: 
       - "my-network"
-    
+    volumes:
+      - mongodb_data:/data/db    # Data save karne ke liye volume map kiya
+
   userservice:
     build: ./user-service
     ports: 
@@ -33,5 +35,5 @@ networks:
     driver: bridge
 
 # Volume ko globally define karna padta hai
-#volumes:
-  #mongodb_data:
+volumes:
+  mongodb_data:
