@@ -5,13 +5,14 @@ RUN  npm install
 COPY .  .
 RUN npm run lint && npm run build  
 
-FROM httpd:latest
+FROM nginx:latest
 
-COPY --from=build /app/dist/  htdocs/
+COPY --from=build /app/dist/  /usr/share/nginx/html/
+COPY nginx.conf  /etc/nginx/nginx.conf
 
 EXPOSE 80
 
-CMD ["httpd", "-D", "FOREGROUND"]
+CMD ["nginx", "-g", "daemon off;"]
 
 
 
