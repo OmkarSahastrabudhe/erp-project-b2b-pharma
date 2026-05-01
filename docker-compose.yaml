@@ -1,39 +1,31 @@
-
+version: '3.8'
 
 services:
-  mongodb-service:
-    image: "mongo:latest"
-    ports:
-      - "27017:27017"
-    
-    networks: 
-      - "my-network"
-    volumes:
-      - mongodb_data:/data/db    # Data save karne ke liye volume map kiya
-
   userservice:
     build: ./user-service
+    container_name: user-service-app
     ports: 
       - "8081:8081"
     environment:
-      MONGODB_URI: "mongodb://mongodb-service:27017/users_db"
-      JWT_SECRET: "404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970"
-      JWT_EXPIRATION: "86400000"
-      JWT_REFRESH_EXPIRATION: "604800000"
-      CORS_ALLOWED_ORIGINS: "*"
-      SEED_ADMIN_EMAIL: "admin@medicalerp.com"
-      SEED_ADMIN_PASSWORD: "Admin@123456"
-      SEED_ORG_NAME: "MedERP HQ"
-      SEED_ORG_REG_NUMBER: "HQ-0001"
+      # Iska naam wahi hona chahiye jo application.yaml mein ${} ke andar hai
+      - MONGODB_URI=mongodb+srv://bnanu168_db_user:maGFVd0lwFlrkHJ4@devops-learning-db.q9rry4o.mongodb.net/users_db?retryWrites=true&w=majority
+      
+      # JWT logic: Base64 secret key for internal auth
+      - JWT_SECRET=tKATROyt2Yb66TxRjagQ5lt5OmPdythS2oSHfw7wzb0=
+      - JWT_EXPIRATION=86400000
+      - JWT_REFRESH_EXPIRATION=604800000
+      
+      # CORS: Taaki tumhara frontend (React/Angular) isse baat kar sake
+      - CORS_ALLOWED_ORIGINS=*
+      
+      # Seeding Logic: Pehli baar run hone par default admin banane ke liye
+      - SEED_ADMIN_EMAIL=admin@medicalerp.com
+      - SEED_ADMIN_PASSWORD=Admin@123456
+      - SEED_ORG_NAME=MedERP HQ
+      - SEED_ORG_REG_NUMBER=HQ-0001
     networks:
-      - "my-network"
-    depends_on:
-      - mongodb-service
+      - my-network
 
 networks:
   my-network:
     driver: bridge
-
-# Volume ko globally define karna padta hai
-volumes:
-  mongodb_data:
