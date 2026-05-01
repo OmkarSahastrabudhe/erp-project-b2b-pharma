@@ -57,6 +57,18 @@ services:
       -  user-service
       -  product-service
 
+  frontend-service:
+    build: ./frontend
+    container_name: frontend-service-app
+    ports: 
+      - "80:80"
+    environment:
+       - VITE_USER_SERVICE_URL=http://65.0.55.212:8081/api/v1
+       - VITE_PRODUCT_SERVICE_URL=http://65.0.55.212:8082/api/v1
+       - VITE_ORDER_SERVICE_URL=http://65.0.55.212:8083/api/v1
+    
+    networks:
+     - my-network
 
 
 
