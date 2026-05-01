@@ -8,7 +8,7 @@ services:
       - "8081:8081"
     environment:
       # Iska naam wahi hona chahiye jo application.yaml mein ${} ke andar hai
-      - MONGODB_URI=mongodb+srv://bnanu168_db_user:maGFVd0lwFlrkHJ4@devops-learning-db.q9rry4o.mongodb.net/users_db?retryWrites=true&w=majority
+      - MONGODB_URI=
       
       # JWT logic: Base64 secret key for internal auth
       - JWT_SECRET=tKATROyt2Yb66TxRjagQ5lt5OmPdythS2oSHfw7wzb0=
