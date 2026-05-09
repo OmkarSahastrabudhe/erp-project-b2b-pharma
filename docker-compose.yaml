@@ -10,15 +10,15 @@ services:
       # Iska naam wahi hona chahiye jo application.yaml mein ${} ke andar hai
       - MONGODB_URI=
       
-      # JWT logic: Base64 secret key for internal auth
+      
       - JWT_SECRET=tKATROyt2Yb66TxRjagQ5lt5OmPdythS2oSHfw7wzb0=
       - JWT_EXPIRATION=86400000
       - JWT_REFRESH_EXPIRATION=604800000
       
-      # CORS: Taaki tumhara frontend (React/Angular) isse baat kar sake
+      
       - CORS_ALLOWED_ORIGINS=*
       
-      # Seeding Logic: Pehli baar run hone par default admin banane ke liye
+      
       - SEED_ADMIN_EMAIL=admin@medicalerp.com
       - SEED_ADMIN_PASSWORD=Admin@123456
       - SEED_ORG_NAME=MedERP HQ
@@ -57,7 +57,18 @@ services:
       -  user-service
       -  product-service
 
-  
+  frontend-service:
+    build: ./frontend
+    container_name: frontend-service-app
+    ports: 
+      - "80:80"
+    environment:
+       - VITE_USER_SERVICE_URL=/api/v1
+       - VITE_PRODUCT_SERVICE_URL=/api/v1
+       - VITE_ORDER_SERVICE_URL=/api/v1
+       - VITE_PROXY_API_HOST=65.0.55.212
+    networks:
+     - my-network
 
 
 
