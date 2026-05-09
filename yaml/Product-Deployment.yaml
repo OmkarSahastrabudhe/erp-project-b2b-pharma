@@ -25,11 +25,11 @@ spec:
           image: 344807217216.dkr.ecr.ap-south-1.amazonaws.com/product-service
           ports:
             - name: traffic-port
-              containerPort: 8081
+              containerPort: 8082
           livenessProbe:
             httpGet:
               path: /api/v1/actuator/health
-              port: 8081
+              port: 8082
             initialDelaySeconds: 60
             periodSeconds: 15
             timeoutSeconds: 5

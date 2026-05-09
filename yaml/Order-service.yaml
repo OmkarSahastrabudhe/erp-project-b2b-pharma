@@ -11,5 +11,5 @@ spec:
     app: order-app
   ports:
     - name: order-traffic-port
-      port: 8081
+      port: 8083
       targetPort: traffic-port
