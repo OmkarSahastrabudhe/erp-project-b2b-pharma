@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: order-service-Deployment
+  name: order-service-deployment
   labels:
     app: order-app
     tier: backend

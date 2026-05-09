@@ -9,7 +9,7 @@ spec:
   scaleTargetRef:
     apiVersion: apps/v1
     kind: Deployment
-    name: user-service-Deployment
+    name: user-service-deployment
   minReplicas: 1
   maxReplicas: 5
   metrics:

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: user-service-Deployment
+  name: user-service-deployment
   labels:
     app: user-app
     tier: backend
